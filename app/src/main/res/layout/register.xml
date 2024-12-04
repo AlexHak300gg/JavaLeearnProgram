@@ -63,8 +63,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
-        android:fontFamily="@font/cuprum"
-        android:onClick="login_button"
         android:text="@string/text_come"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -76,7 +74,6 @@
         app:layout_constraintVertical_bias="0.80"
         app:strokeColor="@color/black"
         app:strokeWidth="2.5sp"
-        tools:fontFamily="@font/cuprum"
         tools:strokeColor="@color/black"
         tools:textSize="24sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

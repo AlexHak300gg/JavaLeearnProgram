@@ -39,25 +39,25 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_height="wrap_content"
+        android:layout_width="279dp"
+        android:layout_height="42dp"
         android:background="@color/black"
         android:text="Completed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.864" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/LessonTopic"
-        android:layout_width="363dp"
-        android:layout_height="473dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="411dp"
+        android:layout_height="478dp"
+        android:layout_marginBottom="132dp"
         android:text="Тема урока"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

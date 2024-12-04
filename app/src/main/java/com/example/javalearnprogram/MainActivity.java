@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.onlytest.Setting.AccountData;
+import com.example.javalearnprogram.Setting.AccountData;
 
 public class MainActivity extends AppCompatActivity {
 
