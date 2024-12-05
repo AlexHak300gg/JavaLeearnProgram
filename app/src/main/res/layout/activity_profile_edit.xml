@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Логин -->
+    <Button
+        android:id="@+id/close_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="close" />
+
+    <TextView
+        android:id="@+id/text_login_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Логин:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edit_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Введите ваш логин"/>
+
+    <!-- ФИО -->
+    <TextView
+        android:id="@+id/text_fio_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ФИО:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edit_fio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Введите ваше полное имя"/>
+
+    <!-- Класс -->
+    <TextView
+        android:id="@+id/text_class_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Класс:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edit_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Укажите номер класса"/>
+
+    <!-- Школа -->
+    <TextView
+        android:id="@+id/text_school_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Школа:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edit_school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Введите название школы"/>
+
+    <!-- Кнопка Сохранить -->
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:text="Сохранить"/>
+</LinearLayout>
