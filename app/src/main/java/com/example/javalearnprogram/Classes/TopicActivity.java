@@ -1,9 +1,11 @@
-package com.example.javalearnprogram;
+package com.example.javalearnprogram.Classes;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.javalearnprogram.R;
 
 public class TopicActivity extends AppCompatActivity {
 

@@ -13,19 +13,19 @@
         android:theme="@style/Theme.JavaLearnProgram"
         tools:targetApi="31">
         <activity
-            android:name=".LessonListActivity"
+            android:name=".Classes.LessonListActivity"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".Classes.Profile"
             android:exported="false" />
         <activity
-            android:name=".TopicActivity"
+            android:name=".Classes.TopicActivity"
             android:exported="false" />
         <activity
             android:name=".Setting.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Classes.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

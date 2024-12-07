@@ -1,4 +1,4 @@
-package com.example.javalearnprogram;
+package com.example.javalearnprogram.Classes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.javalearnprogram.R;
 import com.example.javalearnprogram.Setting.AccountData;
 
 public class MainActivity extends AppCompatActivity {

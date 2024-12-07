@@ -1,4 +1,4 @@
-package com.example.javalearnprogram;
+package com.example.javalearnprogram.Classes;
 
 import android.os.Bundle;
 import android.view.View;

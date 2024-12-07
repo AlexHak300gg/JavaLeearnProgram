@@ -1,4 +1,4 @@
-package com.example.javalearnprogram;
+package com.example.javalearnprogram.Classes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.javalearnprogram.R;
 
 public class Profile extends AppCompatActivity {
     public Button theoryButton;
