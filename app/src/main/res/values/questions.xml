@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Вопрос 1 -->
-    <item name="vopros_one" type="xml">
-        <question>Какой язык программирования используется для разработки приложений под Android?</question>
-        <answer>Java</answer>
-    </item>
-
-    <!-- Вопрос 2 -->
-    <item name="vopros_two" type="xml">
-        <question>Что такое Activity в Android?</question>
-        <answer>Activity представляет собой экран с пользовательским интерфейсом.</answer>
-    </item>
-
-    <!-- Добавьте больше вопросов аналогично -->
+    <question>
+        <text>Вопрос 1</text>
+    </question>
+    <question>
+        <text>Вопрос 2</text>
+    </question>
+    <question>
+        <text>Вопрос 3</text>
+    </question>
 </resources>
