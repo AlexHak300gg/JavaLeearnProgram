@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <test id="1">
+        <name>Тест по основам Android</name>
+        <description>Этот тест проверяет ваши знания по основным концепциям Android-разработки.</description>
+        <questions>
+            <question ref="1"/>
+            <question ref="2"/>
+        </questions>
+    </test>
+</resources>
