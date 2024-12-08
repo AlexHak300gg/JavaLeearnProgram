@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.javalearnprogram.R;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
     public Button theoryButton;
@@ -22,6 +24,10 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
+
+        if(FirebaseAuth.getInstance().getCurrentUser()==null){
+            startActivity(new Intent(Profile.this, LoginActivity.class));
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

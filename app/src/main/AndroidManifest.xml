@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,16 +18,16 @@
             android:name=".Classes.LessonListActivity"
             android:exported="false" />
         <activity
-            android:name=".Classes.Profile"
+            android:name=".Classes.TopicActivity"
             android:exported="false" />
         <activity
-            android:name=".Classes.TopicActivity"
+            android:name=".Classes.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".Setting.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Classes.MainActivity"
+            android:name=".Classes.Profile"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
