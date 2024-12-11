@@ -27,4 +27,4 @@ register -> activity_profile (1) (2)
 
 // // register -> activity_profile (2) -> lesson_list (Со списком теории) (1)
 // //
-// // (1) Когда выбрали задание: lesson_list -> topic_menu
+// // (1) Когда выбрали теорию: lesson_list -> topic_menu

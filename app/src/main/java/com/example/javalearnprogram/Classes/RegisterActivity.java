@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.javalearnprogram.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +23,8 @@ import com.example.javalearnprogram.databinding.ActivityRegisterBinding;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
+
+//    private Button Button_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,15 @@ public class RegisterActivity extends AppCompatActivity {
                                                 .setValue(userInfo);
 
                                         startActivity(new Intent(RegisterActivity.this, Profile.class));
+
+                                        // Что за intent? Куда он? сюда? -> RegisterActivity, дак это и есть эта страница
+                                        // Зачем тут загружать эту же страницу? Я просто не нашел переход на
+                                        // Profile, ведь при верном логине мы должны переходить дальше!
+
+                                        /*
+                                        Intent intent = new Intent(this, <Класс той страницы, куда переходим>.class);
+                                        startActivity(intent);
+                                        */
                                     }
                                 }
                             });

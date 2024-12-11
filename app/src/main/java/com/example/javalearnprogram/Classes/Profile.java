@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
     public Button theoryButton;
+    public Button testButton;
+    public Button practiceButton;
     public Button editingProfileButton;
 
     @Override
@@ -36,10 +38,23 @@ public class Profile extends AppCompatActivity {
         });
 
         theoryButton = findViewById(R.id.theoryButton);
+        testButton = findViewById(R.id.TestsProfile);
+        practiceButton = findViewById(R.id.PracticeProfile);
 
         theoryButton.setOnClickListener(v -> {
             Intent intent = new Intent(Profile.this, LessonListActivity.class); // Предполагаем, что ваше другое Activity называется LessonListActivity
             startActivity(intent);
+            LessonListActivity.TypeList(1);
+        });
+        testButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Profile.this, LessonListActivity.class); // Предполагаем, что ваше другое Activity называется LessonListActivity
+            startActivity(intent);
+            LessonListActivity.TypeList(3);
+        });
+        practiceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Profile.this, LessonListActivity.class); // Предполагаем, что ваше другое Activity называется LessonListActivity
+            startActivity(intent);
+            LessonListActivity.TypeList(2);
         });
 
         editingProfileButton = findViewById(R.id.EditingProfileButton);

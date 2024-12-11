@@ -9,6 +9,8 @@ import com.example.javalearnprogram.R;
 
 public class TopicActivity extends AppCompatActivity {
 
+    private static int NUMtest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,5 +21,9 @@ public class TopicActivity extends AppCompatActivity {
         String topicString = getResources().getString(R.string.topic_1);
 
         lessonTopic.setText(topicString);
+    }
+
+    public static void SetTheory(int num) {
+        NUMtest = num;
     }
 }

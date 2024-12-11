@@ -27,6 +27,8 @@ public class TestActivity extends AppCompatActivity {
     private List<Test> tests = new ArrayList<>();
     private int currentQuestionIndex = 0;
 
+    private static int NUMtest = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,5 +178,9 @@ public class TestActivity extends AppCompatActivity {
         public void setCorrect(String correct) {
             this.correct = correct;
         }
+    }
+
+    public static void SetTest(int num) {
+        NUMtest = num;
     }
 }
