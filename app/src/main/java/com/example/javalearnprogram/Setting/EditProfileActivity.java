@@ -1,5 +1,6 @@
 package com.example.javalearnprogram.Setting;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,61 +9,59 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.example.javalearnprogram.R;
+import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.util.UUID;
 
 public class EditProfileActivity extends AppCompatActivity {
-
     private EditText editLogin, editFIO, editClass, editSchool;
     private Button buttonSave;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
-
-        // Найти элементы интерфейса
         editLogin = findViewById(R.id.edit_login);
         editFIO = findViewById(R.id.edit_fio);
         editClass = findViewById(R.id.edit_class);
         editSchool = findViewById(R.id.edit_school);
         buttonSave = findViewById(R.id.button_save);
 
-        // Загрузить логин из файла loginSave.xml
-        try {
-            File file = new File(getFilesDir(), "loginSave.xml");
-            if (file.exists()) {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                Document doc = builder.parse(new FileInputStream(file));
-                NodeList nodes = doc.getElementsByTagName("value");
-                String login = nodes.item(0).getFirstChild().getNodeValue();
-                editLogin.setText(login); // Установить логин в поле
-            }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            Toast.makeText(this, "Ошибка при загрузке логина!", Toast.LENGTH_SHORT).show();
-        }
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
 
-        // Обработчик нажатия кнопки Сохранить
+        // Загрузка существующего профиля из Firebase Realtime Database
+        databaseReference.child(getCurrentUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user!= null) {
+                        editLogin.setText(user.getLogin());
+                        editFIO.setText(user.getFio());
+                        editClass.setText(user.getSchoolClass());
+                        editSchool.setText(user.getSchool());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditProfileActivity.this, "Ошибка при загрузке профиля!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,48 +76,69 @@ public class EditProfileActivity extends AppCompatActivity {
         String schoolClass = editClass.getText().toString();
         String school = editSchool.getText().toString();
 
-        if (!login.isEmpty() && !fio.isEmpty() && !schoolClass.isEmpty() && !school.isEmpty()) {
-            try {
-                // Создать новый документ
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                Document doc = builder.newDocument();
-
-                Element rootElement = doc.createElement("profile");
-                doc.appendChild(rootElement);
-
-                Element elementLogin = doc.createElement("login");
-                elementLogin.appendChild(doc.createTextNode(login));
-                rootElement.appendChild(elementLogin);
-
-                Element elementFIO = doc.createElement("fio");
-                elementFIO.appendChild(doc.createTextNode(fio));
-                rootElement.appendChild(elementFIO);
-
-                Element elementClass = doc.createElement("class");
-                elementClass.appendChild(doc.createTextNode(schoolClass));
-                rootElement.appendChild(elementClass);
-
-                Element elementSchool = doc.createElement("school");
-                elementSchool.appendChild(doc.createTextNode(school));
-                rootElement.appendChild(elementSchool);
-
-                // Сохранение документа в файл profilStudent.xml
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new FileOutputStream(new File(getFilesDir(), "profilStudent.xml")));
-
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-                transformer.transform(source, result);
-
-                Toast.makeText(this, "Профиль успешно сохранён!", Toast.LENGTH_SHORT).show();
-            } catch (ParserConfigurationException | TransformerException | IOException e) {
-                Toast.makeText(this, "Ошибка при сохранении профиля!", Toast.LENGTH_SHORT).show();
-            }
+        if (!login.isEmpty() &&!fio.isEmpty() &&!schoolClass.isEmpty() &&!school.isEmpty()) {
+            User user = new User(login, fio, schoolClass, school);
+            databaseReference.child(getCurrentUserId()).setValue(user)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(EditProfileActivity.this, "Профиль успешно сохранён!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(EditProfileActivity.this, "Ошибка при сохранении профиля!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         } else {
             Toast.makeText(this, "Заполните все поля!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String getCurrentUserId() {
+        return FirebaseAuth.getInstance().getCurrentUser()!= null
+                ? FirebaseAuth.getInstance().getCurrentUser().getUid()
+                : UUID.randomUUID().toString();
+    }
+
+    public static class User {
+        private String login;
+        private String fio;
+        private String schoolClass;
+        private String school;
+
+        public User() {}
+
+        public User(String login, String fio, String schoolClass, String school) {
+            this.login = login;
+            this.fio = fio;
+            this.schoolClass = schoolClass;
+            this.school = school;
+        }
+
+        public String getLogin() {
+            return login;
+        }
+
+        public void setLogin(String login) {
+            this.login = login;
+        }
+        public String getFio() {
+            return fio;
+        }
+        public void setFio(String fio) {
+            this.fio = fio;
+        }
+        public String getSchoolClass() {
+            return schoolClass;
+        }
+        public void setSchoolClass(String schoolClass) {
+            this.schoolClass = schoolClass;
+        }
+        public String getSchool() {
+            return school;
+        }
+        public void setSchool(String school) {
+            this.school = school;
         }
     }
 }
