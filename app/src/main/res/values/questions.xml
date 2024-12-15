@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <question>
-        <text>Вопрос 1</text>
-    </question>
-    <question>
-        <text>Вопрос 2</text>
-    </question>
-    <question>
-        <text>Вопрос 3</text>
-    </question>
 </resources>

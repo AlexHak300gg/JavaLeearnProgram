@@ -41,7 +41,6 @@ public class EditProfileActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("users");
 
-        // Загрузка существующего профиля из Firebase Realtime Database
         databaseReference.child(getCurrentUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,6 +67,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 saveProfile();
             }
         });
+
     }
 
     private void saveProfile() {
