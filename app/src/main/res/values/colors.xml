@@ -7,4 +7,7 @@
     <color name="light_blue">#C0CCEC</color>
     <color name="grey">#f3f3f3</color>
     <color name="blue">#0000FF</color>
+    <color name="lavender">#8692f7</color>
+    <color name="gray">#151847</color>
+    <color name="transperency">#00000000</color>
 </resources>

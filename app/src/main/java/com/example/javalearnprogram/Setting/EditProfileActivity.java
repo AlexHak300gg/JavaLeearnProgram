@@ -3,12 +3,15 @@ package com.example.javalearnprogram.Setting;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.javalearnprogram.Classes.Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,23 +26,38 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.UUID;
 
 public class EditProfileActivity extends AppCompatActivity {
-    private EditText editLogin, editFIO, editClass, editSchool;
-    private Button buttonSave;
+    private EditText editLogin, editFIO, editUseFIO, editClass, editSchool, editEmail;
+    private Button buttonSave, close;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
-        editLogin = findViewById(R.id.edit_login);
-        editFIO = findViewById(R.id.edit_fio);
-        editClass = findViewById(R.id.edit_class);
-        editSchool = findViewById(R.id.edit_school);
-        buttonSave = findViewById(R.id.button_save);
+        editLogin = findViewById(R.id.editPassword); // Я поставил логин как пароль!
+        editFIO = findViewById(R.id.editName);
+        editUseFIO = findViewById(R.id.editUsername); // На эту кнопку кода нет
+        editEmail = findViewById(R.id.editEmail); // На эту кнопку кода нет
+
+        //TODO Зачем нам класс и школа? Её нет в изменении профиля, если это надо - добавь доп поля и раскоментируй это:
+//        editClass = findViewById(R.id.edit_class); // На эту кнопку кода где то еще лежит
+//        editSchool = findViewById(R.id.edit_school); // На эту кнопку кода где то еще лежит
+
+        buttonSave = findViewById(R.id.saveButton);
+        close = findViewById(R.id.back); // закрыающая страницу кнопка
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("users");
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditProfileActivity.this, Profile.class));
+                finish();
+            }
+        });
 
         databaseReference.child(getCurrentUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.javalearnprogram.R;
+import com.example.javalearnprogram.Setting.EditProfileActivity;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -45,24 +46,27 @@ public class Profile extends AppCompatActivity {
             Intent intent = new Intent(Profile.this, LessonListActivity.class); // Предполагаем, что ваше другое Activity называется LessonListActivity
             startActivity(intent);
             LessonListActivity.TypeList(1);
+            finish();
         });
         testButton.setOnClickListener(v -> {
             Intent intent = new Intent(Profile.this, LessonListActivity.class); // Предполагаем, что ваше другое Activity называется LessonListActivity
             startActivity(intent);
             LessonListActivity.TypeList(3);
+            finish();
         });
         practiceButton.setOnClickListener(v -> {
             Intent intent = new Intent(Profile.this, LessonListActivity.class); // Предполагаем, что ваше другое Activity называется LessonListActivity
             startActivity(intent);
             LessonListActivity.TypeList(2);
+            finish();
         });
 
         editingProfileButton = findViewById(R.id.EditingProfileButton);
         editingProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, Profile.class);
-                startActivity(intent);
+                startActivity(new Intent(Profile.this, EditProfileActivity.class));
+                finish();
             }
         });
     }

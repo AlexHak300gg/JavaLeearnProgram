@@ -1,84 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".Setting.EditProfileActivity">
 
-    <!-- Логин -->
-    <Button
-        android:id="@+id/close_edit_profile"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="close" />
+        android:scaleType="fitXY"
+        android:src="@drawable/backround"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_login_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Логин:"
-        android:textSize="18sp"/>
-
-    <EditText
-        android:id="@+id/edit_login"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Введите ваш логин"/>
+        android:src="@drawable/img"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ФИО -->
-    <TextView
-        android:id="@+id/text_fio_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ФИО:"
-        android:textSize="18sp"/>
-
-    <EditText
-        android:id="@+id/edit_fio"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Введите ваше полное имя"/>
-
-    <!-- Класс -->
-    <TextView
-        android:id="@+id/text_class_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Класс:"
-        android:textSize="18sp"/>
-
-    <EditText
-        android:id="@+id/edit_class"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Укажите номер класса"/>
-
-    <!-- Школа -->
-    <TextView
-        android:id="@+id/text_school_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Школа:"
-        android:textSize="18sp"/>
-
-    <EditText
-        android:id="@+id/edit_school"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Введите название школы"/>
-
-    <!-- Кнопка Сохранить -->
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:text="Сохранить"/>
-</LinearLayout>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textAlignment="center"
+            android:textColor="@color/lavender"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="8dp"
+            android:hint="Name"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="8dp"
+            android:hint="Email"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
+
+        <EditText
+            android:id="@+id/editUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="8dp"
+            android:hint="Username"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="8dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/lavender"
+            android:text="Save"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:scaleType="center"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

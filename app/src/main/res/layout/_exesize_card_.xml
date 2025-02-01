@@ -13,6 +13,7 @@
         android:background="@android:color/transparent"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="onClickExesize"
         android:padding="5dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"

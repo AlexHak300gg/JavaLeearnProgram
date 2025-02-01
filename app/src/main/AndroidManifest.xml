@@ -18,6 +18,9 @@
             android:name=".Classes.LessonListActivity"
             android:exported="false" />
         <activity
+            android:name=".Classes.TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".Classes.TopicActivity"
             android:exported="false" />
         <activity
@@ -25,6 +28,9 @@
             android:exported="false" />
         <activity
             android:name=".Setting.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Classes.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".Classes.Profile"
