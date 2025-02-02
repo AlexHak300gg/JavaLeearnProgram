@@ -32,9 +32,9 @@ public class Profile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
-        tvFullName = findViewById(R.id.tvFullName);
-        tvBirthDate = findViewById(R.id.tvBirthDate);
-        tvEmail = findViewById(R.id.tvEmail);
+        tvFullName = findViewById(R.id.tvFullName2);
+        tvBirthDate = findViewById(R.id.tvBirthDate2);
+        tvEmail = findViewById(R.id.tvEmail2);
         btnEditProfile = findViewById(R.id.btnEditProfile);
         btnLogout = findViewById(R.id.btnLogout);
 
