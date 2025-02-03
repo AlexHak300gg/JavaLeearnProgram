@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -27,7 +28,7 @@ public class LessonListActivity extends AppCompatActivity {
         public RecyclerView list;
         ExesizeAdapter EX_Adapter;
         public static boolean isTheory = false, isTest = false;
-        Button home;
+        public ImageButton home;
 
         @SuppressLint({"MissingInflatedId", "WrongViewCast"})
         @Override

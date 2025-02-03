@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etFullName, etBirthDate, etEmail, etPassword, etConfirmPassword;
-    private Button btnRegister, undo;
+    private Button btnRegister;
+    public ImageButton undo;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 

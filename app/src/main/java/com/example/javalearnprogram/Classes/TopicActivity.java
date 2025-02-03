@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import com.example.javalearnprogram.R;
 public class TopicActivity extends AppCompatActivity {
 
     public static int NUMteor = -1;
-    public Button undo;
+    public ImageButton undo;
 
     @SuppressLint("WrongViewCast")
     @Override

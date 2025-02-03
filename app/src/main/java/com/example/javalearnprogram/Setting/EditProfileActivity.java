@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditText etFullName, etBirthDate, etEmail;
-    private Button btnSave, home;
+    private Button btnSave;
+    public ImageButton undo;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -37,12 +39,12 @@ public class EditProfileActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         etFullName = findViewById(R.id.etFullName);
-        home = findViewById(R.id.home);
+        undo = findViewById(R.id.undo);
         etBirthDate = findViewById(R.id.etBirthDate);
         etEmail = findViewById(R.id.etEmail);
         btnSave = findViewById(R.id.saveButton);
 
-        home.setOnClickListener(new View.OnClickListener() {
+        undo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(EditProfileActivity.this, Profile.class));

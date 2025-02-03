@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,8 @@ public class TestActivity extends AppCompatActivity {
     List<Question> questions;
     List<Test> tests = new ArrayList<>();
     int currentQuestionIndex = 0;
-    Button nextQuest, home;
+    Button nextQuest;
+    ImageButton home;
     byte countCorrect = 0;
 
     public static int NUMtest = -1; // 0 - Дроби, 1 - Степень, 2 - Двухчлен
