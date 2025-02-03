@@ -31,11 +31,11 @@ public class TopicActivity extends AppCompatActivity {
         });
 
         if (NUMteor == 0) { // Теория со степенью
-            lessonTopic.setText("ВСТАВЬ");
+            lessonTopic.setText(getString(R.string.topic_degree));
         } else if (NUMteor == 1) { // Теория с одночленом
-            lessonTopic.setText("ВСТАВЬ");
+            lessonTopic.setText(getString(R.string.topic_monomial));
         } else { // Теория с многочленом
-            lessonTopic.setText("ВСТАВЬ");
+            lessonTopic.setText(getString(R.string.topic_polynomial));
         }
     }
 }
