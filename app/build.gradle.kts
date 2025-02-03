@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.javalearnprogram"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.javalearnprogram"
@@ -38,8 +38,9 @@ android {
 dependencies {
 
     implementation(libs.appcompat)
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.android.gms:play-services-auth:21.3.0")
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)

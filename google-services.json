@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "762780375599",
-    "project_id": "javalearnprogramm",
-    "storage_bucket": "javalearnprogramm.firebasestorage.app"
+    "project_number": "538570567981",
+    "project_id": "java-learn-programm",
+    "storage_bucket": "java-learn-programm.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:762780375599:android:6788cf440cdc5347b304da",
+        "mobilesdk_app_id": "1:538570567981:android:25415df96efc4086b063a4",
         "android_client_info": {
           "package_name": "com.example.javalearnprogram"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBfI0Ffl4xssa3hyiPhVwouqiglvoCAnVQ"
+          "current_key": "AIzaSyAtDiiAgvsSgZk34uLZZB3n-Oy8QxtqdfY"
         }
       ],
       "services": {
