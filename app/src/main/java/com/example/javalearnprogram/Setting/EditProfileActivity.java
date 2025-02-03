@@ -1,12 +1,16 @@
 package com.example.javalearnprogram.Setting;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.javalearnprogram.Classes.Profile;
 import com.example.javalearnprogram.Classes.User;
 import com.example.javalearnprogram.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,10 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditText etFullName, etBirthDate, etEmail;
-    private Button btnSave;
+    private Button btnSave, home;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +37,18 @@ public class EditProfileActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         etFullName = findViewById(R.id.etFullName);
+        home = findViewById(R.id.home);
         etBirthDate = findViewById(R.id.etBirthDate);
         etEmail = findViewById(R.id.etEmail);
-        btnSave = findViewById(R.id.btnSave);
+        btnSave = findViewById(R.id.saveButton);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditProfileActivity.this, Profile.class));
+                finish();
+            }
+        });
 
         loadUserData();
         btnSave.setOnClickListener(v -> saveUserData());

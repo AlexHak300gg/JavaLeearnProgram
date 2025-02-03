@@ -1,5 +1,7 @@
 package com.example.javalearnprogram.Classes;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.javalearnprogram.R;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +23,12 @@ public class TestActivity extends AppCompatActivity {
     List<Question> questions;
     List<Test> tests = new ArrayList<>();
     int currentQuestionIndex = 0;
-    Button nextQuest;
+    Button nextQuest, home;
     byte countCorrect = 0;
 
     public static int NUMtest = -1; // 0 - Дроби, 1 - Степень, 2 - Двухчлен
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +40,17 @@ public class TestActivity extends AppCompatActivity {
         radioButtonAnswer3 = findViewById(R.id.radioButtonAnswer3);
         radioButtonAnswer4 = findViewById(R.id.radioButtonAnswer4);
         nextQuest = findViewById(R.id.buttonNext);
+
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LessonListActivity.isTest = true;
+                LessonListActivity.isTheory = false;
+                startActivity(new Intent(TestActivity.this, LessonListActivity.class));
+                finish();
+            }
+        });
 
         setQuestAndTest();
         setCurentQuest();
@@ -70,7 +78,8 @@ public class TestActivity extends AppCompatActivity {
                 if (currentQuestionIndex < 10) {
                     setCurentQuest();
                 } else {
-                    Toast.makeText(TestActivity.this, "Верно: " + countCorrect + "/10", Toast.LENGTH_LONG).show();
+                    ResultTestActivity.point = countCorrect;
+                    startActivity(new Intent(TestActivity.this, ResultTestActivity.class));
                     finish();
                 }
             }

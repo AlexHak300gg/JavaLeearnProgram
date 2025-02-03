@@ -1,11 +1,13 @@
 package com.example.javalearnprogram.Classes;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.javalearnprogram.R;
@@ -16,11 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etFullName, etBirthDate, etEmail, etPassword, etConfirmPassword;
-    private Button btnRegister;
+    private Button btnRegister, undo;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +31,23 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
-        etFullName = findViewById(R.id.etFullName);
+        undo = findViewById(R.id.home);
+        etFullName = findViewById(R.id.fulName);
         etBirthDate = findViewById(R.id.etBirthDate);
         etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
+        etPassword = findViewById(R.id.password);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(v -> registerUser());
+
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
     }
 
     private void registerUser() {

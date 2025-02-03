@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -25,9 +26,10 @@ public class LessonListActivity extends AppCompatActivity {
         TextView title;
         public RecyclerView list;
         ExesizeAdapter EX_Adapter;
-        public static boolean isTheory = false, isTest = false, isPractic = false;
+        public static boolean isTheory = false, isTest = false;
+        Button home;
 
-        @SuppressLint("MissingInflatedId")
+        @SuppressLint({"MissingInflatedId", "WrongViewCast"})
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -37,6 +39,15 @@ public class LessonListActivity extends AppCompatActivity {
                 Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
                 v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
                 return insets;
+            });
+
+            home = findViewById(R.id.home);
+            home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(LessonListActivity.this, Profile.class));
+                    finish();
+                }
             });
 
             // Вывод названия на гл. текст
@@ -65,15 +76,6 @@ public class LessonListActivity extends AppCompatActivity {
                 TestActivity.NUMtest = id;
                 startActivity(intent);
                 finish();
-            }
-        }
-
-        // Вызывать когда создаётся Intent сюда! (Вызывать перед Intent)
-        public static void TypeList(int code) {
-            switch (code) {
-                case 1: isTheory = true; break;
-                case 2: isPractic = true; break;
-                case 3: isTest = true; break;
             }
         }
 }
