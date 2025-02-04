@@ -79,6 +79,10 @@ public class TestActivity extends AppCompatActivity {
                 currentQuestionIndex++;
                 if (currentQuestionIndex < 10) {
                     setCurentQuest();
+                    radioButtonAnswer1.setChecked(false);
+                    radioButtonAnswer2.setChecked(false);
+                    radioButtonAnswer3.setChecked(false);
+                    radioButtonAnswer4.setChecked(false);
                 } else {
                     ResultTestActivity.point = countCorrect;
                     startActivity(new Intent(TestActivity.this, ResultTestActivity.class));
@@ -102,7 +106,7 @@ public class TestActivity extends AppCompatActivity {
         if (NUMtest == 0) { // Степень
             Question q1 = new Question("Вопрос 1: Какое значение имеет 2^3", "8");
             questions.add(q1);
-            Question q2 = new Question("Вопрос 2: Как записывается степень 5 в виде произведения?", "5 * 5 * 5 * 5 * 5");
+            Question q2 = new Question("Вопрос 2: Как записывается 5 в степени 5, в виде произведения?", "5 * 5 * 5 * 5 * 5");
             questions.add(q2);
             Question q3 = new Question("Вопрос 3: Найдите 3^0", "1");
             questions.add(q3);

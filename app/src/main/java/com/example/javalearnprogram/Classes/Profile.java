@@ -51,8 +51,13 @@ public class Profile extends AppCompatActivity {
 
     private void openLessonList(boolean isTest) {
         Intent intent = new Intent(this, LessonListActivity.class);
-        intent.putExtra("isTest", isTest);
-        intent.putExtra("isTheory", !isTest);
+        if (isTest) {
+            LessonListActivity.isTheory = false;
+            LessonListActivity.isTest = true;
+        } else {
+            LessonListActivity.isTheory = true;
+            LessonListActivity.isTest = false;
+        }
         startActivity(intent);
         finish();
     }

@@ -45,6 +45,7 @@
                 android:layout_weight="1"
                 android:text="ФИО:"
                 android:textAlignment="viewStart"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="normal"
@@ -60,6 +61,7 @@
                 android:layout_weight="1"
                 android:text="Дата рождения:"
                 android:textAlignment="viewStart"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="normal"
@@ -73,6 +75,7 @@
                 android:layout_weight="1"
                 android:text="Почта:"
                 android:textAlignment="viewStart"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="normal"
@@ -107,6 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:backgroundTint="@color/blue"
                 android:text="Редактировать профиль" />
 
             <Button
@@ -114,6 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:backgroundTint="@color/blue"
                 android:text="Выйти из аккаунта" />
         </LinearLayout>
 
@@ -143,6 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:backgroundTint="@color/blue"
                 android:text="Теория"
                 android:textAlignment="center"
                 android:textSize="34sp" />
@@ -152,6 +158,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:backgroundTint="@color/blue"
                 android:text="Тест"
                 android:textAlignment="center"
                 android:textSize="34sp" />

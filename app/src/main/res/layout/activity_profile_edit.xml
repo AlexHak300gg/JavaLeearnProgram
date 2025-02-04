@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -40,9 +41,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Profile"
+                android:text="Редактирование профиля"
                 android:textAlignment="center"
-                android:textColor="@color/lavender"
+                android:textColor="@color/black"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
@@ -52,7 +53,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 android:drawablePadding="8dp"
-                android:hint="A"
+                android:hint="ФИО"
                 android:padding="8dp"
                 android:textColor="@color/black" />
 
@@ -62,7 +63,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="Эл. почта"
                 android:padding="8dp"
                 android:textColor="@color/black" />
 
@@ -73,7 +74,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="Отображаемое имя"
                 android:padding="8dp"
                 android:textColor="@color/black" />
 
@@ -83,7 +84,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="Пароль"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black" />
@@ -93,8 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/lavender"
-                android:text="Save"
+                android:backgroundTint="@color/blue"
+                android:text="Сохранить"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
@@ -105,7 +106,10 @@
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        tools:layout_editor_absoluteX="160dp"
-        tools:layout_editor_absoluteY="605dp" />
+        android:backgroundTint="@color/blue"
+        android:text="Назад"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

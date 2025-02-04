@@ -16,14 +16,17 @@ public class TopicActivity extends AppCompatActivity {
 
     public static int NUMteor = -1;
     public ImageButton undo;
+    public TextView title;
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.topic_menu);
 
         TextView lessonTopic = findViewById(R.id.LessonTopic);
+        title = findViewById(R.id.title);
+
         undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,10 +39,13 @@ public class TopicActivity extends AppCompatActivity {
         });
 
         if (NUMteor == 0) { // Теория со степенью
+            title.setText("О степенях");
             lessonTopic.setText(getString(R.string.topic_degree));
         } else if (NUMteor == 1) { // Теория с одночленом
+            title.setText("О одночлене");
             lessonTopic.setText(getString(R.string.topic_monomial));
         } else { // Теория с многочленом
+            title.setText("О многочлене");
             lessonTopic.setText(getString(R.string.topic_polynomial));
         }
     }
