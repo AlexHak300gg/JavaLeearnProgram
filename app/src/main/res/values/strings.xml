@@ -4,4 +4,7 @@
     <string name="text_password">Введите пароль</string>
     <string name="text_come">Войти</string>
     <string name="text_error_log">Неверный логин или пароль!</string>
+    <string name="full_name_format">ФИО: %s</string>
+    <string name="birth_date_format">Дата рождения: %s</string>
+    <string name="email_format">Почта: %s</string>
 </resources>

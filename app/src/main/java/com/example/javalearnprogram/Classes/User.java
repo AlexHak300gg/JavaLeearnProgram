@@ -1,13 +1,12 @@
 package com.example.javalearnprogram.Classes;
 
 public class User {
-    public String fullName, birthDate, email;
+    public String fullName;
+    public String birthDate;
+    public String email;
 
+    // Пустой конструктор обязателен для Firebase
     public User() {}
 
-    public User(String fullName, String birthDate, String email) {
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.email = email;
-    }
+    // Геттеры и сеттеры при необходимости
 }
