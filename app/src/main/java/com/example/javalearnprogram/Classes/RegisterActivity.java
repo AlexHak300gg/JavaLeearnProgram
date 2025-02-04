@@ -1,78 +1,111 @@
 package com.example.javalearnprogram.Classes;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.javalearnprogram.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etFullName, etBirthDate, etEmail, etPassword, etConfirmPassword;
-    private Button btnRegister;
-    public ImageButton undo;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
 
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-
-        undo = findViewById(R.id.home);
         etFullName = findViewById(R.id.fulName);
         etBirthDate = findViewById(R.id.etBirthDate);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.password);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
-        btnRegister = findViewById(R.id.btnRegister);
 
-        btnRegister.setOnClickListener(v -> registerUser());
+        Button btnRegister = findViewById(R.id.btnRegister);
 
-        undo.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                finish();
+                String fullName = etFullName.getText().toString();
+                String birthDate = etBirthDate.getText().toString();
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+                String confirmPassword = etConfirmPassword.getText().toString();
+
+                if (password.equals(confirmPassword)) {
+                    saveUserData(fullName, birthDate, email, password);
+                    Intent intent = new Intent(RegisterActivity.this, Profile.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Пароли не совпадают", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    private void registerUser() {
-        String fullName = etFullName.getText().toString().trim();
-        String birthDate = etBirthDate.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        String confirmPassword = etConfirmPassword.getText().toString().trim();
+    private void saveUserData(String fullName, String birthDate, String email, String password) {
+        try {
+            File file = new File(getFilesDir(), "accountData.xml");
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc;
 
-        if (password.equals(confirmPassword)) {
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            String userId = mAuth.getCurrentUser().getUid();
-                            User user = new User(fullName, birthDate, email);
-                            mDatabase.child(userId).setValue(user);
-                            Toast.makeText(RegisterActivity.this, "Регистрация успешна!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(RegisterActivity.this, "Ошибка регистрации: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        } else {
-            Toast.makeText(this, "Пароли не совпадают", Toast.LENGTH_SHORT).show();
+            if (file.exists()) {
+                doc = docBuilder.parse(file);
+            } else {
+                doc = docBuilder.newDocument();
+                Element rootElement = doc.createElement("users");
+                doc.appendChild(rootElement);
+            }
+
+            Element userElement = doc.createElement("user");
+
+            Element fullNameElement = doc.createElement("fullName");
+            fullNameElement.appendChild(doc.createTextNode(fullName));
+            userElement.appendChild(fullNameElement);
+
+            Element birthDateElement = doc.createElement("birthDate");
+            birthDateElement.appendChild(doc.createTextNode(birthDate));
+            userElement.appendChild(birthDateElement);
+
+            Element emailElement = doc.createElement("email");
+            emailElement.appendChild(doc.createTextNode(email));
+            userElement.appendChild(emailElement);
+
+            Element passwordElement = doc.createElement("password");
+            passwordElement.appendChild(doc.createTextNode(password));
+            userElement.appendChild(passwordElement);
+
+            doc.getDocumentElement().appendChild(userElement);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new FileOutputStream(file));
+            transformer.transform(source, result);
+
+        } catch (ParserConfigurationException | IOException | TransformerException | org.xml.sax.SAXException e) {
+            e.printStackTrace();
         }
     }
 }

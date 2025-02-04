@@ -1,95 +1,122 @@
 package com.example.javalearnprogram.Setting;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.javalearnprogram.Classes.Profile;
-import com.example.javalearnprogram.Classes.User;
 import com.example.javalearnprogram.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private EditText etFullName, etBirthDate, etEmail;
-    private Button btnSave;
-    public ImageButton undo;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private EditText etFullName, etBirthDate, etPassword;
 
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-
         etFullName = findViewById(R.id.etFullName);
-        undo = findViewById(R.id.undo);
         etBirthDate = findViewById(R.id.etBirthDate);
-        etEmail = findViewById(R.id.etEmail);
-        btnSave = findViewById(R.id.saveButton);
+        etPassword = findViewById(R.id.etPassword);
 
-        undo.setOnClickListener(new View.OnClickListener() {
+        Button btnSave = findViewById(R.id.btnSave);
+        Button btnBack = findViewById(R.id.back);
+
+        loadUserData();
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditProfileActivity.this, Profile.class));
-                finish();
+                String fullName = etFullName.getText().toString();
+                String birthDate = etBirthDate.getText().toString();
+                String password = etPassword.getText().toString();
+
+                updateUserData(fullName, birthDate, password);
+                Toast.makeText(EditProfileActivity.this, "Данные сохранены", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditProfileActivity.this, Profile.class);
+                startActivity(intent);
             }
         });
 
-        loadUserData();
-        btnSave.setOnClickListener(v -> saveUserData());
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditProfileActivity.this, Profile.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadUserData() {
-        String userId = mAuth.getCurrentUser().getUid();
-        mDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                if (user != null) {
-                    etFullName.setText(user.fullName);
-                    etBirthDate.setText(user.birthDate);
-                    etEmail.setText(user.email);
-                }
-            }
+        try {
+            File file = new File(getFilesDir(), "accountData.xml");
+            if (!file.exists()) return;
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(EditProfileActivity.this, "Ошибка загрузки данных: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(file);
+
+            NodeList userList = doc.getElementsByTagName("user");
+
+            if (userList.getLength() > 0) {
+                Element userElement = (Element) userList.item(0);
+
+                String fullName = userElement.getElementsByTagName("fullName").item(0).getTextContent();
+                String birthDate = userElement.getElementsByTagName("birthDate").item(0).getTextContent();
+                String password = userElement.getElementsByTagName("password").item(0).getTextContent();
+
+                etFullName.setText(fullName);
+                etBirthDate.setText(birthDate);
+                etPassword.setText(password);
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void saveUserData() {
-        String fullName = etFullName.getText().toString().trim();
-        String birthDate = etBirthDate.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
+    private void updateUserData(String fullName, String birthDate, String password) {
+        try {
+            File file = new File(getFilesDir(), "accountData.xml");
+            if (!file.exists()) return;
 
-        String userId = mAuth.getCurrentUser().getUid();
-        User user = new User(fullName, birthDate, email);
-        mDatabase.child(userId).setValue(user)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(EditProfileActivity.this, "Данные сохранены!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(EditProfileActivity.this, "Ошибка сохранения данных: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(file);
+
+            NodeList userList = doc.getElementsByTagName("user");
+
+            if (userList.getLength() > 0) {
+                Element userElement = (Element) userList.item(0);
+
+                userElement.getElementsByTagName("fullName").item(0).setTextContent(fullName);
+                userElement.getElementsByTagName("birthDate").item(0).setTextContent(birthDate);
+                userElement.getElementsByTagName("password").item(0).setTextContent(password);
+
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new FileOutputStream(file));
+                transformer.transform(source, result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
