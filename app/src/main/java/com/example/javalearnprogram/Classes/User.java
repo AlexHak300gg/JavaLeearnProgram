@@ -6,7 +6,7 @@ public class User {
     public String email;
 
     // Пустой конструктор обязателен для Firebase
-    public User() {}
+    public User(String fullName, String birthDate, String email) {}
 
     // Геттеры и сеттеры при необходимости
 }
