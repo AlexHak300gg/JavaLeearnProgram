@@ -33,7 +33,7 @@
             android:name=".Setting.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Classes.LoginActivity"
+            android:name=".Classes.Profile"
             android:exported="false" />
         <activity
             android:name=".Classes.LoginActivity"
